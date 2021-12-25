@@ -12,12 +12,24 @@ const Drawer = createDrawerNavigator();
 
 export const MenuLateral = () => {
 
-  const { width } = useWindowDimensions();
+  const dimensions = useWindowDimensions();
+
+  console.log(dimensions);
+  
 
   return (
    <Drawer.Navigator
 		drawerContent = { (props) => <MenuInterno {...props} />  } 	
-    	// drawerType = { (width >= 768) ? 'permanent' : 'front' }
+		screenOptions={{
+			drawerStyle: {
+				borderTopEndRadius: 30,
+					borderBottomEndRadius: 30
+  		 
+				},
+
+			drawerType: dimensions.width >= 768 ? 'permanent' : 'front'
+
+		}}
     >
       <Drawer.Screen name="HomeScreen"  options={{title:''}} component={ HomeScreen } />
       <Drawer.Screen name="ProfileScreen"  options={{title:'Profile'}} component={ ProfileScreen } />
