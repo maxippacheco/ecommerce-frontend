@@ -6,16 +6,17 @@ import { ProfileScreen } from '../views/ProfileScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { globalStyles } from '../themes/app-theme';
 import { LateralMenuItem } from '../components/LateralMenuItem';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+import { User } from '../interfaces/app-interfaces';
 
 const height = Dimensions.get('window').height;
 const Drawer = createDrawerNavigator();
 
 export const MenuLateral = () => {
 
-  const dimensions = useWindowDimensions();
+	const dimensions = useWindowDimensions();
 
-  console.log(dimensions);
-  
 
   return (
    <Drawer.Navigator
@@ -40,8 +41,7 @@ export const MenuLateral = () => {
 
 const MenuInterno = ({navigation}: DrawerContentComponentProps) => {
 
- 
-	
+	const { logout, user } = useContext(AuthContext);
 	
   return (
 
@@ -62,9 +62,10 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps) => {
 				/>
 			</TouchableOpacity>
 			
-			<Text style={styles.title}>Ricardo Suarez</Text>
-			<Text style={{marginBottom: 20}}>@ricardo_suarez</Text>
 
+			<Text style={styles.title}>Ricardo</Text>
+			<Text style={{marginBottom: 20}}>@juarez</Text>	
+	
 		</View>
 		
 		
@@ -103,7 +104,7 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps) => {
 
 		<View style={styles.logoutContainer}>
 			
-			<TouchableOpacity style={styles.logoutButton} activeOpacity={0.8}>
+			<TouchableOpacity style={styles.logoutButton} activeOpacity={0.8} onPress={logout}>
 				<Icon 
 					name='arrow-back-outline'
 					size={20}

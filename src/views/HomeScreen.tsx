@@ -8,12 +8,7 @@ export const HomeScreen = ({ navigation }: DrawerContentComponentProps) => {
 	
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity
-				onPress={() => {navigation.navigate('ProfileScreen')}}
-			>
-				<Text>Clicked</Text>
-				<Icon name='airplane-outline' size={30} />
-			</TouchableOpacity>
+			
 		</View>
 	);
 }

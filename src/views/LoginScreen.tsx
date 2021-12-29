@@ -6,21 +6,32 @@ import { globalStyles } from '../themes/app-theme';
 import { useForm } from '../hooks/useForm';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { useEffect } from 'react';
+
 
 export const LoginScreen = () => {
 
-	
+	const context = useContext(AuthContext);	
+
+	const { signIn, user, token } = context;
+
+	useEffect(() => {
+		
+		console.log(context);
+		
+	}, [context])
+
 
 	const {form, onChange, setFormValue} = useForm({
-		username: '',
+		email: '',
 		password: ''
-	})
+	});
 
-	const { password, username } = form;
+	const { password, email } = form;
 
-	const onLogin = () => {
-		console.log('hello');
-		
+	const onLogin = async() => {
+		signIn({email, password});
+
 	}
 
 	return (
@@ -36,8 +47,8 @@ export const LoginScreen = () => {
 							style={loginStyles.customInput} 
 							placeholder='Username'
 							autoCapitalize='none'
-							onChangeText={(value) => onChange(value, 'username')}
-							value={username}
+							onChangeText={(value) => onChange(value, 'email')}
+							value={email}
 							onSubmitEditing={onLogin}
 						/>
 					</View>

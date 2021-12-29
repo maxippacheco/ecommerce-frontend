@@ -1,19 +1,20 @@
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const baseURL = 'http://localhost:8080/api'
+const baseURL = 'https://ecommerce-react-native.herokuapp.com/api/';
 
-export const ecommerceApi = axios.create({ baseURL });
+const ecommerceApi = axios.create({ baseURL });
 
-// cafeApi.interceptors.request.use(
-// 	async ( config ) => {
-// 		const token = await AsyncStorage.getItem('token');
+ecommerceApi.interceptors.request.use(
+	async ( config ) => {
+		const token = await AsyncStorage.getItem('token');
 		
-// 		if ( token ) {
-// 			config.headers['x-token'] = token;
-// 		}
+		if ( token ) {
+			config.headers!['x-token'] = token;
+		}
 
-// 		return config;
-// 	}
-// );
+		return config;
+	}
+);
 
-// export default cafeApi;
+export default ecommerceApi;
