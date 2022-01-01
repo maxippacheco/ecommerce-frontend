@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { createDrawerNavigator, DrawerContentComponentProps, DrawerContentScrollView } from '@react-navigation/drawer';
-import { ScrollViewComponent, useWindowDimensions, StyleSheet, View, Text, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { createDrawerNavigator, DrawerContentComponentProps, DrawerContentScrollView, DrawerScreenProps } from '@react-navigation/drawer';
+import { useWindowDimensions, StyleSheet, View, Text, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { HomeScreen } from '../views/HomeScreen';
 import { ProfileScreen } from '../views/ProfileScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -8,13 +8,15 @@ import { globalStyles } from '../themes/app-theme';
 import { LateralMenuItem } from '../components/LateralMenuItem';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { User } from '../interfaces/app-interfaces';
 import { CartIcon } from '../components/CartIcon';
+import { CartScreen } from '../views/CartScreen';
 
 const height = Dimensions.get('window').height;
 const Drawer = createDrawerNavigator();
 
-export const MenuLateral = () => {
+interface Props extends DrawerScreenProps<any, any>{};
+
+export const MenuLateral = ({navigation}:Props) => {
 
 	const dimensions = useWindowDimensions();
 
@@ -29,12 +31,13 @@ export const MenuLateral = () => {
 			},	
 			drawerType: dimensions.width >= 768 ? 'permanent' : 'front',
 			headerRight: ()=> (
-				<CartIcon />
+				<CartIcon onPress={() => navigation.navigate('CartScreen')} />
 			)
 		}}
     >
       <Drawer.Screen name="HomeScreen"  options={{title: ''}} component={ HomeScreen } />
       <Drawer.Screen name="ProfileScreen"  options={{title:''}} component={ ProfileScreen } />
+		<Drawer.Screen name="CartScreen" options={{title: ''}} component={ CartScreen } />
     </Drawer.Navigator>
   );
 }
