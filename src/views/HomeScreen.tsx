@@ -1,15 +1,17 @@
 import React from 'react';
-import {Button, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import { DrawerContentComponentProps } from '@react-navigation/drawer';
-import Icon  from 'react-native-vector-icons/Ionicons';
+import { ScrollView } from 'react-native-gesture-handler';
+import { globalStyles } from '../themes/app-theme';
+import { ProductsLayout } from '../components/ProductsLayout';
 
-export const HomeScreen = ({ navigation }: DrawerContentComponentProps) => {
-	
-	
+export const HomeScreen = () => {
+
 	return (
-		<View style={styles.container}>
-			
-		</View>
+		<ScrollView style={{backgroundColor: 'white'}}>
+			<Text style={styles.title}>Welcome</Text>
+			<ProductsLayout />
+		</ScrollView>
 	);
 }
 
@@ -17,7 +19,11 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 	},
-	button: {
-		margin: 20
+	title:{
+		marginLeft: 20,
+		marginVertical: 20,
+		fontSize: 25,
+		fontWeight: '700',
+		color: globalStyles.titleColor
 	}
 });

@@ -9,6 +9,7 @@ import { LateralMenuItem } from '../components/LateralMenuItem';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { User } from '../interfaces/app-interfaces';
+import { CartIcon } from '../components/CartIcon';
 
 const height = Dimensions.get('window').height;
 const Drawer = createDrawerNavigator();
@@ -24,16 +25,16 @@ export const MenuLateral = () => {
 		screenOptions={{
 			drawerStyle: {
 				borderTopEndRadius: 30,
-					borderBottomEndRadius: 30
-  		 
-				},
-
-			drawerType: dimensions.width >= 768 ? 'permanent' : 'front'
-
+				borderBottomEndRadius: 30
+			},	
+			drawerType: dimensions.width >= 768 ? 'permanent' : 'front',
+			headerRight: ()=> (
+				<CartIcon />
+			)
 		}}
     >
-      <Drawer.Screen name="HomeScreen"  options={{title:''}} component={ HomeScreen } />
-      <Drawer.Screen name="ProfileScreen"  options={{title:'Profile'}} component={ ProfileScreen } />
+      <Drawer.Screen name="HomeScreen"  options={{title: ''}} component={ HomeScreen } />
+      <Drawer.Screen name="ProfileScreen"  options={{title:''}} component={ ProfileScreen } />
     </Drawer.Navigator>
   );
 }
@@ -63,8 +64,8 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps) => {
 			</TouchableOpacity>
 			
 
-			<Text style={styles.title}>Ricardo</Text>
-			<Text style={{marginBottom: 20}}>@juarez</Text>	
+			<Text style={styles.title}>{user?.username}</Text>
+			<Text style={{marginBottom: 20}}>{user?.email}</Text>	
 	
 		</View>
 		

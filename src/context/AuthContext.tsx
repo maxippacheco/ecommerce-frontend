@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useReducer } from "react";
+import { useReducer, useEffect } from 'react';
 import { createContext } from "react";
 import { authReducer, AuthState } from './authReducer';
 import { User, LoginData, LoginResponse } from '../interfaces/app-interfaces';
@@ -30,8 +30,23 @@ export const AuthProvider = ({children}: any) => {
 	
 	const [state, dispatch] = useReducer(authReducer, authInitialState);
 
+	useEffect(() => {
+		checkToken();
+	}, [])
 
-	//TODO: CHECK TOKEN
+	const checkToken = async() => {
+		const token = AsyncStorage.getItem('token');
+
+		if (!token) {
+			dispatch({type: 'not-authenticated'});
+		}
+			
+
+		// const resp = await ecommerceApi.post<LoginResponse>('/session/login');
+
+	}
+
+	
 	// TODO: REGISTER 
 
 	const signIn = async({email, password}: LoginData) => {

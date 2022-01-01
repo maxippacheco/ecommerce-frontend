@@ -14,7 +14,10 @@ export const AuthNavigation = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false
+        headerShown: false,
+        cardStyle:{
+          backgroundColor: 'white'
+        }
       }}
     >
       {
