@@ -1,9 +1,19 @@
 import React from 'react';
+import { useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Product } from '../interfaces/app-interfaces';
+import { CartContext } from '../context/CartContext';
 
 
 export const ProductCard = (props: Product) => {
+
+  const { addToCart } = useContext( CartContext );
+
+  const onPress = () => {
+    addToCart(props);    
+  }
+
 	return (
 		<View style={styles.productContainer}>
           <View style={styles.productLayout}>
@@ -11,7 +21,7 @@ export const ProductCard = (props: Product) => {
             <Text style={styles.productName}>{props.name}</Text>
             <View style={styles.productNameContainer}>
               <Text style={styles.productPrice}>{'$' + props.price}</Text>
-              <TouchableOpacity activeOpacity={0.8}>
+              <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
                 <Text style={{...styles.productPrice, color: '#59addd'}}>
                   ADD TO CART
                 </Text>

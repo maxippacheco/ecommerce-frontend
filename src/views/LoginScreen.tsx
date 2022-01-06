@@ -1,5 +1,5 @@
 import React from 'react';
-import {KeyboardAvoidingView, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Keyboard, KeyboardAvoidingView, StyleSheet, Text, TextInput, View} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Background } from '../components/Background';
 import { globalStyles } from '../themes/app-theme';
@@ -13,7 +13,7 @@ export const LoginScreen = () => {
 
 	const context = useContext(AuthContext);	
 
-	const { signIn, user, token } = context;
+	const { signIn } = context;
 
 	useEffect(() => {
 		
@@ -31,6 +31,7 @@ export const LoginScreen = () => {
 
 	const onLogin = async() => {
 		signIn({email, password});
+		Keyboard.dismiss();
 
 	}
 

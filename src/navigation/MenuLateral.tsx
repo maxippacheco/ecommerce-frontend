@@ -32,11 +32,14 @@ export const MenuLateral = ({navigation}:Props) => {
 			drawerType: dimensions.width >= 768 ? 'permanent' : 'front',
 			headerRight: ()=> (
 				<CartIcon onPress={() => navigation.navigate('CartScreen')} />
-			)
+			),
+			headerStyle:{
+				elevation: 0
+			}
 		}}
     >
       <Drawer.Screen name="HomeScreen"  options={{title: ''}} component={ HomeScreen } />
-      <Drawer.Screen name="ProfileScreen"  options={{title:''}} component={ ProfileScreen } />
+      <Drawer.Screen name="ProfileScreen"  options={{title:'My Profile', headerTitleAlign: 'center'}} component={ ProfileScreen } />
 		<Drawer.Screen name="CartScreen" options={{title: ''}} component={ CartScreen } />
     </Drawer.Navigator>
   );
@@ -119,7 +122,7 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps) => {
 
     </DrawerContentScrollView>
 
-);
+	);
 
 }
 

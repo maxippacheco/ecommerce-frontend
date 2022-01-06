@@ -10,8 +10,6 @@ type ProductsContextProps = {
 export const ProductsContext = createContext({} as ProductsContextProps);
 
 
-
-
 export const ProductProvider = ({ children }: any) => {
 	
 	const [products, setProducts] = useState<Product[]>([]);
@@ -31,6 +29,5 @@ export const ProductProvider = ({ children }: any) => {
 			{ children }
 		</ProductsContext.Provider>
 	);
-
 
 }

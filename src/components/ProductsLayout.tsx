@@ -23,7 +23,7 @@ export const ProductsLayout = () => {
   return (
     <>
       {products.map(product => (
-			<ProductCard {...product} />
+			<ProductCard {...product} key={product.id} />
       ))}
     </>
   );

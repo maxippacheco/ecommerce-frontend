@@ -5,6 +5,7 @@ import { MenuLateral } from './src/navigation/MenuLateral';
 import { AuthNavigation } from './src/navigation/AuthNavigation';
 import { AuthProvider } from './src/context/AuthContext';
 import { ProductProvider } from './src/context/ProductContext';
+import { CartProvider } from './src/context/CartContext';
 
 
 const AppState = ({ children }: any) => {
@@ -21,7 +22,9 @@ const App = () => {
       <NavigationContainer>
         <AppState>
             <ProductProvider>
-              <AuthNavigation />
+              <CartProvider>
+                <AuthNavigation />
+              </CartProvider>
             </ProductProvider>
         </AppState>
       </NavigationContainer>

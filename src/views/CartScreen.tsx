@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import { CartContext } from '../context/CartContext';
 
 export const CartScreen = () => {
+
+	const { cart } = useContext( CartContext );
+
+	if (!cart) {
+		return <Text>Nothing for now</Text>
+	}
+
 	return (
 		<View>
-			<Text>Cart Screen</Text>
+			{
+				cart.map( product => (
+					<View>
+						<Text>
+							{product.name}
+						</Text>
+					</View>
+				))
+			}
 		</View>
 	);
 }

@@ -1,6 +1,5 @@
-
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import { globalStyles } from '../themes/app-theme';
 
 export const Background = () => {

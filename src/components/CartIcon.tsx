@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { CartContext } from '../context/CartContext';
 
 interface Props{
   onPress: () => void;
@@ -8,7 +9,8 @@ interface Props{
 
 export const CartIcon = ({onPress}: Props) => {
  
-  
+  const { cart } = useContext(CartContext);   
+
   return (
     <View style={{display: 'flex', height: '100%', justifyContent: 'center'}}>
       <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
@@ -22,10 +24,12 @@ export const CartIcon = ({onPress}: Props) => {
           bottom: -5,
           borderRadius: 999,
         }}>
-          <Text style={{
-            color: 'white',
-            textAlign: 'center',
-          }}>+9</Text>
+          {
+            (cart.length <= 9)
+            ? ( <Text style={{ color: 'white', textAlign: 'center', }}>{ cart.length }</Text> )
+            : ( <Text style={{ color: 'white', textAlign: 'center', }}>+9</Text> )
+            
+          }
         </View>
         <Icon name="cart-outline" size={30} color="black" style={{marginRight: 10}} />
       </TouchableOpacity>
