@@ -5,6 +5,7 @@ import { authReducer, AuthState } from './authReducer';
 import { User, LoginData, LoginResponse } from '../interfaces/app-interfaces';
 import ecommerceApi from '../api/ecommerceApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ImagePickerResponse } from 'react-native-image-picker';
 
 type AuthContextProps = {
 	status: 'checking' | 'authenticated' | 'not-authenticated',
@@ -12,7 +13,8 @@ type AuthContextProps = {
 	user: User | null,
 	errorMessage: string,
 	signIn: (loginData: LoginData) => void,
-	logout: () => void
+	logout: () => void,
+	uploadImage: (data: ImagePickerResponse, id: string) => void
 }
 
 
@@ -76,11 +78,34 @@ export const AuthProvider = ({children}: any) => {
 			
 		}
 	}
-
+	
 	const logout = async() => {
 		dispatch({
 			type: 'logOut'
 		})
+	}
+
+	const uploadImage = async(data: ImagePickerResponse, id: string) => {
+
+		const fileToUpload = {
+			uri: data.assets![0].uri,
+			type: data.assets![0].type,
+			name: data.assets![0].fileName
+		};
+
+		const formData = new FormData();
+		
+		formData.append('file', fileToUpload);
+
+		try {
+			
+			const resp = await ecommerceApi.put(`/files/users/${ id }`, formData);			
+
+			console.log(resp);
+
+		} catch (error) {
+			console.log({error});
+		}
 	}
 
 
@@ -89,7 +114,8 @@ export const AuthProvider = ({children}: any) => {
 		<AuthContext.Provider value={{
 			...state,
 			signIn,
-			logout
+			logout,
+			uploadImage
 
 		}}>
 			{ children }

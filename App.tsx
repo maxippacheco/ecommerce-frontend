@@ -1,17 +1,22 @@
-import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import { MenuLateral } from './src/navigation/MenuLateral';
+import { NavigationContainer } from '@react-navigation/native';
 import { AuthNavigation } from './src/navigation/AuthNavigation';
 import { AuthProvider } from './src/context/AuthContext';
 import { ProductProvider } from './src/context/ProductContext';
 import { CartProvider } from './src/context/CartContext';
+import { ThemeProvider } from './src/context/ThemeContext';
 
 
 const AppState = ({ children }: any) => {
   return(
     <AuthProvider>
-      { children }
+      <ProductProvider>
+        <CartProvider>
+          <ThemeProvider>
+            { children }
+          </ThemeProvider>
+        </CartProvider>
+        </ProductProvider>
     </AuthProvider>
   )
 }
@@ -21,11 +26,7 @@ const App = () => {
   return (
       <NavigationContainer>
         <AppState>
-            <ProductProvider>
-              <CartProvider>
-                <AuthNavigation />
-              </CartProvider>
-            </ProductProvider>
+            <AuthNavigation />
         </AppState>
       </NavigationContainer>
   );

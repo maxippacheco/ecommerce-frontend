@@ -11,8 +11,8 @@ type ActionType =
 	| { type: 'signIn', payload: {token: string, user: User} }
 	| { type: 'logOut' }
 	| { type: 'addError', payload:{ errorMessage: string } }
-	| {type: 'removeError'}
-	| {type: 'not-authenticated'}
+	| { type: 'removeError'}
+	| { type: 'not-authenticated'}
 
 
 
@@ -27,7 +27,7 @@ export const authReducer = ( state: AuthState , action: ActionType ): AuthState 
 				user: action.payload.user,
 				errorMessage: ''
 			};
-	
+
 			case 'addError':
 				return{
 					...state,

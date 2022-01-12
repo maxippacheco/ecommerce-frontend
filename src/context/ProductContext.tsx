@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import { Categorie, Product, ProductsResponse } from '../interfaces/app-interfaces';
+import { Product, ProductsResponse } from '../interfaces/app-interfaces';
 import ecommerceApi from '../api/ecommerceApi';
 
 type ProductsContextProps = {

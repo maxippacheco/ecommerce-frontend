@@ -1,12 +1,11 @@
 import React from 'react';
 import {StyleSheet, Text} from 'react-native';
-import { DrawerContentComponentProps } from '@react-navigation/drawer';
 import { ScrollView } from 'react-native-gesture-handler';
 import { globalStyles } from '../themes/app-theme';
 import { ProductsLayout } from '../components/ProductsLayout';
 
 export const HomeScreen = () => {
-
+		
 	return (
 		<ScrollView style={{backgroundColor: 'white'}}>
 			<Text style={styles.title}>Welcome</Text>

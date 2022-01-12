@@ -1,6 +1,5 @@
 import React from 'react';
 import { useContext } from 'react';
-import { useState, useEffect } from 'react';
 import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Product } from '../interfaces/app-interfaces';
 import { CartContext } from '../context/CartContext';
@@ -8,10 +7,12 @@ import { CartContext } from '../context/CartContext';
 
 export const ProductCard = (props: Product) => {
 
-  const { addToCart } = useContext( CartContext );
+  const { addToCart, cart } = useContext( CartContext );
 
   const onPress = () => {
-    addToCart(props);    
+    if (!cart.includes(props)) {
+      addToCart(props);   
+    }
   }
 
 	return (

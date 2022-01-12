@@ -16,15 +16,15 @@ export const CartProvider = ({ children }: any) => {
 	const [cart, setCart] = useState<Product[]>([]);
 
 	const addToCart = (element: Product) => {
-		setCart([...cart, element]);
+		setCart([element, ...cart]);
 	}
 
 	const removeToCart = (element: Product) => {
-		
+		setCart(product => product.filter(el => el.id !== element.id));
 	}
 
 	const clearCart = () => {
-		
+		setCart([]);	
 	}
 
 	return(
