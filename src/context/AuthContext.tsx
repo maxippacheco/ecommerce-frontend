@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useReducer, useEffect } from 'react';
 import { createContext } from "react";
 import { authReducer, AuthState } from './authReducer';
-import { User, LoginData, LoginResponse } from '../interfaces/app-interfaces';
+import { User, LoginData, LoginResponse, UpdateUserResponse } from '../interfaces/app-interfaces';
 import ecommerceApi from '../api/ecommerceApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ImagePickerResponse } from 'react-native-image-picker';
@@ -14,7 +14,8 @@ type AuthContextProps = {
 	errorMessage: string,
 	signIn: (loginData: LoginData) => void,
 	logout: () => void,
-	uploadImage: (data: ImagePickerResponse, id: string) => void
+	uploadImage: (data: ImagePickerResponse, id: string) => Promise<void>,
+	updateUser: ( userData: User , id: string ) => Promise<void>
 }
 
 
@@ -42,10 +43,6 @@ export const AuthProvider = ({children}: any) => {
 		if (!token) {
 			dispatch({type: 'not-authenticated'});
 		}
-			
-
-		// const resp = await ecommerceApi.post<LoginResponse>('/session/login');
-
 	}
 
 	
@@ -67,9 +64,7 @@ export const AuthProvider = ({children}: any) => {
 				}
 			})
 
-			
 			await AsyncStorage.setItem('token', token);
-
 
 		} catch (error: any) {
 			console.log({error: error});
@@ -78,6 +73,32 @@ export const AuthProvider = ({children}: any) => {
 			
 		}
 	}
+
+	const updateUser = async( userData: User , id: string ) => {
+		
+		try {
+
+			const { data } = await ecommerceApi.put<UpdateUserResponse>(`/users/${ id }`, {...userData})
+
+			console.log(data);
+
+			dispatch({
+				type: 'updateUser',
+				payload:{
+					user: data.userUpdated
+				}
+			})
+
+			
+		} catch (error: any) {
+
+			console.log({error: error});
+
+			dispatch({type: 'addError', payload:{ errorMessage: error }})
+		}
+
+	}
+
 	
 	const logout = async() => {
 		dispatch({
@@ -86,6 +107,8 @@ export const AuthProvider = ({children}: any) => {
 	}
 
 	const uploadImage = async(data: ImagePickerResponse, id: string) => {
+
+		// TODO: Update context	
 
 		const fileToUpload = {
 			uri: data.assets![0].uri,
@@ -99,14 +122,21 @@ export const AuthProvider = ({children}: any) => {
 
 		try {
 			
-			const resp = await ecommerceApi.put(`/files/users/${ id }`, formData);			
+			const { data } = await ecommerceApi.put(`/files/users/${ id }`, formData);
 
-			console.log(resp);
+			dispatch({
+				type: 'updateUser',
+				payload:{
+					user: data.model
+				}
+			})			
+
 
 		} catch (error) {
 			console.log({error});
 		}
 	}
+
 
 
 	
@@ -115,7 +145,8 @@ export const AuthProvider = ({children}: any) => {
 			...state,
 			signIn,
 			logout,
-			uploadImage
+			uploadImage,
+			updateUser
 
 		}}>
 			{ children }

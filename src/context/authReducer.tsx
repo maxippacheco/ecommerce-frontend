@@ -9,6 +9,7 @@ export interface AuthState {
 
 type ActionType = 
 	| { type: 'signIn', payload: {token: string, user: User} }
+	| { type: 'updateUser', payload: { user: User} }
 	| { type: 'logOut' }
 	| { type: 'addError', payload:{ errorMessage: string } }
 	| { type: 'removeError'}
@@ -27,6 +28,14 @@ export const authReducer = ( state: AuthState , action: ActionType ): AuthState 
 				user: action.payload.user,
 				errorMessage: ''
 			};
+
+		case 'updateUser':
+			return{
+				...state,
+				status: 'authenticated',
+				user: action.payload.user,
+				errorMessage: ''
+			}
 
 			case 'addError':
 				return{
