@@ -12,7 +12,6 @@ import { CartIcon } from '../components/CartIcon';
 import { CartScreen } from '../views/CartScreen';
 import { SearchScreen } from '../views/SearchScreen';
 import { ThemeContext } from '../context/ThemeContext';
-import * as ImagePicker from "react-native-image-picker"
 import { takePhoto } from '../helpers/take-photo';
 
 
@@ -55,24 +54,9 @@ export const MenuLateral = ({navigation}:Props) => {
 const MenuInterno = ({navigation}: DrawerContentComponentProps) => {
 
 	const { logout, user, uploadImage } = useContext(AuthContext);
+	// TODO: refactorizar el themeContext porque sino re jugado
 	const { isDark, switchTheme } = useContext( ThemeContext );
-
-
-	// const takePhoto = () => {
-	// 	ImagePicker.launchCamera({
-	// 		mediaType: 'photo',
-	// 		quality: 0.5
-	// 	}, (resp) => {
-			
-	// 		if( resp.didCancel ) return;
-	// 		if( !resp.assets![0].uri) return;
-
-	// 		uploadImage( resp, user!.id);			
-			
-
-	// 	})
-	// }
-
+	
   	return (
 
     <DrawerContentScrollView>
@@ -80,7 +64,6 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps) => {
        <View style={styles.avatarContainer}>
 			
 			{/* TODO: renderizar condicionalmente la imagen */}
-			{/* TODO: actualizar la imagen instantaneamente en el navbar => hacer un reload o algo xd */}
 			<Image source={{uri: user?.img}} style={styles.avatarIcon}/>
 
 			<TouchableOpacity style={styles.imageButton} activeOpacity={0.8} onPress={() => takePhoto(user!.id, uploadImage)}>

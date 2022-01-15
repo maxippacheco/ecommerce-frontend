@@ -108,8 +108,6 @@ export const AuthProvider = ({children}: any) => {
 
 	const uploadImage = async(data: ImagePickerResponse, id: string) => {
 
-		// TODO: Update context	
-
 		const fileToUpload = {
 			uri: data.assets![0].uri,
 			type: data.assets![0].type,

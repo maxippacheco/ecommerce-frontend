@@ -3,6 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import { globalStyles } from '../themes/app-theme';
 
 export const Background = () => {
+
 	return <View style={styles.lineBackground} />;
 }
 

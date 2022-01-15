@@ -16,7 +16,6 @@ export const ProfileScreen = () => {
 		newLastName: user?.lastName,
 		newUsername: user?.username,
 		newEmail: user?.email,
-		// newImage: '',
 	});
 
 	const { newFirstName, newLastName, newUsername, newEmail } = form;

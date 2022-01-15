@@ -5,10 +5,11 @@ import {useContext, useEffect} from 'react';
 import { ProductCard } from './ProductCard';
 
 export const ProductsLayout = () => {
-  const {getProducts, products} = useContext(ProductsContext);
+  const {getProducts, products, getCategories} = useContext(ProductsContext);
 
   useEffect(() => {
     getProducts();
+    getCategories();
   }, []);
 
   if (!products) {

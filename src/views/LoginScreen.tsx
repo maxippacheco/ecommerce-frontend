@@ -6,23 +6,18 @@ import { globalStyles } from '../themes/app-theme';
 import { useForm } from '../hooks/useForm';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { useEffect } from 'react';
+import { StackScreenProps } from '@react-navigation/stack';
+import { RootStackParams } from '../navigation/AuthNavigation';
 
 
-export const LoginScreen = () => {
+interface Props extends StackScreenProps<RootStackParams, 'Login'>{};
 
-	const context = useContext(AuthContext);	
+export const LoginScreen = ({ navigation }: Props) => {
 
+	const context = useContext(AuthContext);
 	const { signIn } = context;
 
-	useEffect(() => {
-		
-		console.log(context);
-		
-	}, [context])
-
-
-	const {form, onChange, setFormValue} = useForm({
+	const {form, onChange} = useForm({
 		email: '',
 		password: ''
 	});
@@ -71,9 +66,9 @@ export const LoginScreen = () => {
 						</TouchableOpacity>
 					</View>
 
-					<View style={loginStyles.inputContainer}>
+					<TouchableOpacity style={loginStyles.inputContainer} onPress={ () => navigation.navigate('Register') } activeOpacity={0.8} >
 						<Text style={loginStyles.registerLink}>Don't you have an account?</Text>
-					</View>
+					</TouchableOpacity>
 
 			</KeyboardAvoidingView>
 

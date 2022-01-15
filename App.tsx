@@ -6,6 +6,8 @@ import { ProductProvider } from './src/context/ProductContext';
 import { CartProvider } from './src/context/CartContext';
 import { ThemeProvider } from './src/context/ThemeContext';
 
+import {LogBox } from 'react-native';
+LogBox.ignoreLogs(['Reanimated 2']);
 
 const AppState = ({ children }: any) => {
   return(

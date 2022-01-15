@@ -1,11 +1,20 @@
 import * as React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, StackScreenProps } from '@react-navigation/stack';
 import { LoginScreen } from '../views/LoginScreen';
 import { MenuLateral } from './MenuLateral';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { RegisterScreen } from '../views/RegisterScreen';
 
-const Stack = createStackNavigator();
+// stack params
+export type RootStackParams = {
+  Ecommerce: undefined;
+  Login: undefined;
+  Register: undefined;
+}
+
+// implementing params on the stack
+const Stack = createStackNavigator<RootStackParams>();
 
 export const AuthNavigation = () => {
 
@@ -23,7 +32,14 @@ export const AuthNavigation = () => {
       {
         (status === 'authenticated') 
         ? ( <Stack.Screen name="Ecommerce" component={MenuLateral} />)
-        : ( <Stack.Screen name="Login" component={LoginScreen} />)
+        : 
+        ( 
+          <>
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Register" component={RegisterScreen} />
+          </>
+        
+        )
       }
     </Stack.Navigator>	
   );
