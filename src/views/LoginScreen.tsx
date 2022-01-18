@@ -41,7 +41,8 @@ export const LoginScreen = ({ navigation }: Props) => {
 					<View style={loginStyles.inputContainer}>
 						<TextInput 
 							style={loginStyles.customInput} 
-							placeholder='Username'
+							placeholder='Email'
+							keyboardType='email-address'
 							autoCapitalize='none'
 							onChangeText={(value) => onChange(value, 'email')}
 							value={email}

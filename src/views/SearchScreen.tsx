@@ -26,6 +26,7 @@ export const SearchScreen = () => {
     setFilterProducts( products.filter( product => product.name.toLocaleLowerCase().includes( search ) ));
 
     setFormValue({search: ''});
+
   }
 
   return (
@@ -48,8 +49,8 @@ export const SearchScreen = () => {
 
       <View style={{display: 'flex', flexDirection: 'row', marginVertical: 10, justifyContent: 'center'}}>
       {
-        categories.map( categorie => (
-          <CategoriesSpan { ...categorie } key={ categorie._id } />
+        categories.map( (categorie, index) => (
+          <CategoriesSpan { ...categorie } key={ index } />
         ))
       }
       </View>

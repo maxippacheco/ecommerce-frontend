@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useReducer, useEffect } from 'react';
 import { createContext } from "react";
 import { authReducer, AuthState } from './authReducer';
-import { User, LoginData, LoginResponse, UpdateUserResponse } from '../interfaces/app-interfaces';
+import { User, LoginData, LoginResponse, UpdateUserResponse, RegisterData, RegisterResponse } from '../interfaces/app-interfaces';
 import ecommerceApi from '../api/ecommerceApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ImagePickerResponse } from 'react-native-image-picker';
@@ -12,6 +12,7 @@ type AuthContextProps = {
 	token: string | null,
 	user: User | null,
 	errorMessage: string,
+	signUp: (registerData: RegisterData) => void,
 	signIn: (loginData: LoginData) => void,
 	logout: () => void,
 	uploadImage: (data: ImagePickerResponse, id: string) => Promise<void>,
@@ -46,7 +47,24 @@ export const AuthProvider = ({children}: any) => {
 	}
 
 	
-	// TODO: REGISTER 
+	const signUp = async(registerData: RegisterData ) => {
+		
+		
+		try {
+			const { data } = await ecommerceApi.post<RegisterResponse>('/users', { ...registerData });
+
+			console.log(data);
+
+		} catch (error: any) {
+			console.log({error});
+			
+			dispatch({type: 'addError', payload:{ errorMessage: error }})
+
+		}
+
+
+	}
+
 
 	const signIn = async({email, password}: LoginData) => {
 		
@@ -141,6 +159,7 @@ export const AuthProvider = ({children}: any) => {
 	return(
 		<AuthContext.Provider value={{
 			...state,
+			signUp,
 			signIn,
 			logout,
 			uploadImage,
