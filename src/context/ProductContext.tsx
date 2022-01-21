@@ -14,7 +14,6 @@ export const ProductsContext = createContext({} as ProductsContextProps);
 
 export const ProductProvider = ({ children }: any) => {
 
-	// TODO: REFACTORIZAR, CREAR REDUCER PARA REEMPLAZARLO POR LOS DOS STATE
 
 	const [products, setProducts] = useState<Product[]>([]);
 	const [categories, setCategories] = useState<Categorie[]>([]);

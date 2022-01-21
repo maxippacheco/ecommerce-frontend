@@ -8,7 +8,7 @@ import { CartContext } from '../context/CartContext';
 
 
 export const CartCard = (props: Product) => {
- 
+
 	const { removeToCart } = useContext(CartContext);
 
 	const {units, less, add} = useUnits();

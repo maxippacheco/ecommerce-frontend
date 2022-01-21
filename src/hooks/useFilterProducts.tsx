@@ -8,7 +8,8 @@ export const useFilterProducts = () => {
 
 	const [productsFilter, setFilterProducts] = useState<Product[]>([]);
 
-	const filterProductByCategorie = (categorie: Categorie) => {
+	const filterProductByCategorie = (categorie: Categorie) => {		
+
     	setFilterProducts(products.filter(product => product.categorie.name === categorie.name));
     	console.log(productsFilter);
   	}	

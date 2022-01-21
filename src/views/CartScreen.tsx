@@ -5,6 +5,7 @@ import { CartCard } from '../components/CartCard';
 import { globalStyles } from '../themes/app-theme';
 
 export const CartScreen = () => {
+	
 
 	const { cart } = useContext( CartContext );
 

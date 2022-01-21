@@ -12,6 +12,7 @@ export const ProductCard = (props: Product) => {
   const onPress = () => {
     if (!cart.includes(props)) {
       addToCart(props);   
+      
     }
   }
 

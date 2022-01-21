@@ -14,7 +14,6 @@ export const ProductsLayout = () => {
 
   if (!products) {
     return (
-      // TODO: Loader
       <View>
         <Text>Loading...</Text>
       </View>
