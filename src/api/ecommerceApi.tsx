@@ -1,7 +1,7 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const baseURL = 'https://ecommerce-react-native.herokuapp.com/api/';
+const baseURL = 'YOUR_API';
 
 const ecommerceApi = axios.create({ baseURL });
 
